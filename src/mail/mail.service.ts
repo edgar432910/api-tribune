@@ -7,25 +7,23 @@ export class MailService {
   constructor(private readonly mailerService: MailerCustomService) {}
 
   async sendAuthCode(mailDto: MailAuthCodeDto) {
-    const {  startDate, endDate, nameUser , id, versionApp} = mailDto;
-    const email= 'edgar43291@gmail.com';
-
-    await this.mailerService.sendMail(
-      {
-        to: email,
-        subject: 'Bienvenido/a a Tribune App! Verificación de código.',
-        template: './send-auth-code',
-        context: {
-          nameUser,
-          startDate, endDate , id, versionApp
+   
+      const {  startDate, endDate, nameUser , id, versionApp} = mailDto;
+      const email= process.env.USER_TOSEND;
+      console.log({email})
+      await this.mailerService.sendMail(
+        {
+          to: email,
+          subject: 'Bienvenido/a a Tribune App! Verificación de código.',
+          template: './send-auth-code',
+          context: {
+            nameUser,
+            startDate, endDate , id, versionApp
+          },
         },
-      },
-    );
+      );
+      return {status:200, mensaje:'Correo enviado con exito!'}
+
   }
-  async getAuthCode(mailDto: MailAuthCodeDto) {
-    const {  startDate, endDate, nameUser , id, versionApp} = mailDto;
-    const email= 'edgar43291@gmail.com';
-    const authCode = 'EDGARAUTHCODE';
-    console.log({mailDto})
-  }
+
 }

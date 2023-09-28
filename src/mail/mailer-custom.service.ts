@@ -24,15 +24,6 @@ export class MailerCustomService {
         template,
         context,
       });
-      // return {
-      //   message:'message sent successfully',
-      //   data:{
-      //     to,
-      //     subject,
-      //     template,
-      //     context
-      //   }
-      // }
     } catch (e) {
       console.error(e);
       throw new InternalServerErrorException(e)
